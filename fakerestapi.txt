@@ -1,0 +1,47 @@
+smook test 1 (Authors) case 1
+API: GET /api/v1/Authors
+ Test Case: response should be 200 OK
+ Expected Result: 200 OK
+ Actual Result: 200 OK
+ Status: Pass
+ 
+ test case 2 ( Objects inside response)
+ API: GET /api/v1/Authors
+ Expected Result: Objects inside response contain, id, idBook, firstName, lastName
+ Actual Result: Objects inside response contain, id, idBook, firstName, lastName
+ Status: Pass
+ ---------------------------
+ 
+ smook test 2 (add the new Author's details) case 1
+ API: POST /api/v1/Authors
+ Test Case: Register a new valid Author successfully and response code "201 Created".
+ Expected Result: "201 Created"
+ Actual Result: 200 OK
+ Status: Fail.
+ 
+ test case 2( firstname & lastname should be mandatory)
+ API: POST /api/v1/Authors
+ test Case: firstname & lastname should be mandatory
+ Expected Result: the response code should be 400 if firstname is missed in the request body 
+ Actual Result: 200
+ Status: Fail.
+ ---------------------
+ smook test 3 (Searching with valid idBook) 
+ API: GET /api/v1/Authors/authors/books/{idBook}
+ Expected Result: Searching with  idBook (2) will returned book with id 2
+ Actual Result: it returned books with same id that we searching with idBook have alot of ids
+  Status: fail
+------------
+smook test 4 (data is updated successfully) case 1
+API: PUT /api/v1/Authors/{id}
+test Case: Author's data is updated successfully
+Expected Result : updated authors firstName and lastname  
+Actual Result: it updated authors firstName and lastname 
+Status: pass.
+
+test case 2(make sure the updated is happend  )
+API: GET /api/v1/Authors/{id}
+test Case:The author's data is changed in GET request
+Expected Result: data is changed when we seaching with id
+Actual Result: no changing in data
+Status: Fail.
