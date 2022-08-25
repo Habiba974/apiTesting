@@ -1,0 +1,209 @@
+{
+	"info": {
+		"_postman_id": "e69b8fb3-b750-4c3f-a408-321fb70d03bf",
+		"name": "trello api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22097529"
+	},
+	"item": [
+		{
+			"name": "token and key",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{trelloApi}}1/members/me?boards=open&key=eec5135f517ee15533cbcb41be75af51&token=83b0df26252b309b96aca8592c7e743ee1ad71651f2cff10ba2e7f9bb3a84056",
+					"host": [
+						"{{trelloApi}}1"
+					],
+					"path": [
+						"members",
+						"me"
+					],
+					"query": [
+						{
+							"key": "boards",
+							"value": "open"
+						},
+						{
+							"key": "key",
+							"value": "eec5135f517ee15533cbcb41be75af51"
+						},
+						{
+							"key": "token",
+							"value": "83b0df26252b309b96aca8592c7e743ee1ad71651f2cff10ba2e7f9bb3a84056"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"permissionLevel\", function () {\r",
+							"  \r",
+							"    pm.expect(pm.response.json().prefs.permissionLevel).to.equal(\"private\");});\r",
+							"\r",
+							"pm.test(\"canBePublic\", function () {\r",
+							"  \r",
+							"    pm.expect(pm.response.json().prefs.canBePublic).to.equal(true);});\r",
+							"\r",
+							"pm.test(\"canInvite\", function () {\r",
+							"  \r",
+							"    pm.expect(pm.response.json().prefs.canInvite).to.equal(true);});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{trelloApi}}1/boards/?name=Api testing&key=eec5135f517ee15533cbcb41be75af51&token=83b0df26252b309b96aca8592c7e743ee1ad71651f2cff10ba2e7f9bb3a84056",
+					"host": [
+						"{{trelloApi}}1"
+					],
+					"path": [
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Api testing"
+						},
+						{
+							"key": "key",
+							"value": "eec5135f517ee15533cbcb41be75af51"
+						},
+						{
+							"key": "token",
+							"value": "83b0df26252b309b96aca8592c7e743ee1ad71651f2cff10ba2e7f9bb3a84056"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" var body = JSON.parse('{ \"boards\": [{\r",
+							"            \"id\": \"6307958f7a055e006f7e7f1e\",\r",
+							"            \"name\": \"Api testing\",\r",
+							"            \"closed\": false,\r",
+							"            \"idOrganization\": \"6285284617842427ba62b024\",\r",
+							"            \"pinned\": false\r",
+							"        },\r",
+							"        {\r",
+							"            \"id\": \"630795d3539dc6002b59fa7f\",\r",
+							"            \"name\": \"Api testing\",\r",
+							"            \"closed\": false,\r",
+							"            \"idOrganization\": \"6285284617842427ba62b024\",\r",
+							"            \"pinned\": false\r",
+							"        },\r",
+							"        {\r",
+							"            \"id\": \"63079609a8b9b60017009ad2\",\r",
+							"            \"name\": \"Api testing\",\r",
+							"            \"closed\": false,\r",
+							"            \"idOrganization\": \"6285284617842427ba62b024\",\r",
+							"            \"pinned\": false\r",
+							"        },\r",
+							"        {\r",
+							"            \"id\": \"62866f96198c673404335627\",\r",
+							"            \"name\": \"Project Management\",\r",
+							"            \"closed\": false,\r",
+							"            \"idOrganization\": \"6285284617842427ba62b024\",\r",
+							"            \"pinned\": false\r",
+							"        },\r",
+							"        {\r",
+							"            \"id\": \"62852aea686abf298cf67201\",\r",
+							"            \"name\": \"project\",\r",
+							"            \"closed\": false,\r",
+							"            \"idOrganization\": \"6285284617842427ba62b024\",\r",
+							"            \"pinned\": false\r",
+							"        },\r",
+							"        {\r",
+							"            \"id\": \"63079557f30148009a86e014\",\r",
+							"            \"name\": \"{name}\",\r",
+							"            \"closed\": false,\r",
+							"            \"idOrganization\": \"6285284617842427ba62b024\",\r",
+							"            \"pinned\": false\r",
+							"        }\r",
+							"    ] }');\r",
+							"  tests[\"Count: \"  + body.value.length] = true;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{trelloApi}}1/members/me?boards=open&key=eec5135f517ee15533cbcb41be75af51&token=83b0df26252b309b96aca8592c7e743ee1ad71651f2cff10ba2e7f9bb3a84056",
+					"host": [
+						"{{trelloApi}}1"
+					],
+					"path": [
+						"members",
+						"me"
+					],
+					"query": [
+						{
+							"key": "boards",
+							"value": "open"
+						},
+						{
+							"key": "key",
+							"value": "eec5135f517ee15533cbcb41be75af51"
+						},
+						{
+							"key": "token",
+							"value": "83b0df26252b309b96aca8592c7e743ee1ad71651f2cff10ba2e7f9bb3a84056"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "creat a list",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
